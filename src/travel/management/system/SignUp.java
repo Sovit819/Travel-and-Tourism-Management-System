@@ -189,12 +189,20 @@ public class SignUp extends JFrame implements ActionListener{
                     return;
                 }
                 Connec c = new Connec();
-                String query = "INSERT INTO Accountdetails values('"+Name+"', '"+Username+"', '"+Password+"', '"+Address+"', '"+Phone_Number+"', '"+Security_Question+"', '"+Answer+"')";
-                c.s.executeUpdate(query);
-                
-                JOptionPane.showMessageDialog(null, "Account is created successfully");
-                setVisible(false);
-                new Login().setVisible(true);
+                String query = "SELECT * FROM Accountdetails WHERE Username ='"+Username+"'";
+                ResultSet result = c.s.executeQuery(query);
+
+                    if(result.next()){
+                       JOptionPane.showMessageDialog(null, "Username already exits", "Invalid Username", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        String query1 = "INSERT INTO Accountdetails values('"+Name+"', '"+Username+"', '"+Password+"', '"+Address+"', '"+Phone_Number+"', '"+Security_Question+"', '"+Answer+"')";
+                        c.s.executeUpdate(query1);
+
+                        JOptionPane.showMessageDialog(null, "Account is created successfully");
+                        setVisible(false);
+                        new Login().setVisible(true);
+                    }
             }
             catch(Exception e1){
                 e1.printStackTrace();

@@ -7,7 +7,7 @@ public class LoadingPage extends JFrame implements Runnable{
     
     Thread thread;
     JProgressBar loading;
-    String name;
+    String name,username;
     
     public void run(){
         try{
@@ -20,9 +20,9 @@ public class LoadingPage extends JFrame implements Runnable{
                 else{
                     setVisible(false);
                     if(name.equalsIgnoreCase("Admin"))
-                        new Admin().setVisible(true);
+                        new Admin(username).setVisible(true);
                     else
-                        new Dashboard().setVisible(true);
+                        new Dashboard(username).setVisible(true);
                 }
                 Thread.sleep(30);
             }
@@ -32,10 +32,11 @@ public class LoadingPage extends JFrame implements Runnable{
         }
     }
     
-    LoadingPage(String name){
+    LoadingPage(String name, String username){
         
         thread = new Thread(this);
         this.name = name;
+        this.username = username;
         
         setLayout(null);
         int framewidth=750;
@@ -80,7 +81,7 @@ public class LoadingPage extends JFrame implements Runnable{
         
         thread.start();
     }
-    public static void main(String[] args){
-        new LoadingPage("");
-    }
+//    public static void main(String[] args){
+//        new LoadingPage("","");
+//    }
 }

@@ -20,9 +20,17 @@ public class Connec {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args){
-        new Connec();
-        
+    
+    public Connection getConnection() {
+        return c;
     }
+
+    public Statement getStatement() {
+        return s;
+    }
+
+//    public static void main(String[] args){
+//        new Connec();
+//        
+//    }
 }
